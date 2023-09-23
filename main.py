@@ -26,15 +26,15 @@ import os
 #os.environ['QT_DEBUG_PLUGINS'] = '1'
 import subprocess
 subprocess.run('nvidia-smi', shell=True)
-# from pyvirtualdisplay import Display
-# display = Display(visible=0, size=(1920, 1080)).start()
+from pyvirtualdisplay import Display
+display = Display(visible=0, size=(1080, 860)).start()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--config', type=str, default='argument.yml',help='Configure of post processing')
 args = parser.parse_args()
 config = yaml.safe_load(open(args.config, 'r'))
 if config['offscreen_rendering'] is True:
-    vispy.use(app='egl')
+    vispy.use(app='pyqt5')
 os.makedirs(config['mesh_folder'], exist_ok=True)
 os.makedirs(config['video_folder'], exist_ok=True)
 os.makedirs(config['depth_folder'], exist_ok=True)
