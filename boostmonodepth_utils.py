@@ -23,11 +23,13 @@ def run_boostmonodepth(img_names, src_folder, depth_folder):
     for img_name in img_names:
         base_name = os.path.basename(img_name)
         tgt_name = os.path.join(BOOST_BASE, BOOST_INPUTS, base_name)
+        print('Here：', base_name)
         os.system(f'cp {img_name} {tgt_name}')
 
         # keep only the file name here.
         # they save all depth as .png file
         tgt_names.append(os.path.basename(tgt_name).replace('.jpg', '.png'))
+        print('Here：', tgt_names)
 
     os.system(f'cd {BOOST_BASE} && python run.py --Final --data_dir {BOOST_INPUTS}/  --output_dir {BOOST_OUTPUTS} --depthNet 0')
 
@@ -38,6 +40,7 @@ def run_boostmonodepth(img_names, src_folder, depth_folder):
 
         # resize and save depth
         target_height, target_width = int(round(H * scale)), int(round(W * scale))
+        print(os.path.join(BOOST_BASE, BOOST_OUTPUTS, tgt_name))
         depth = imageio.imread(os.path.join(BOOST_BASE, BOOST_OUTPUTS, tgt_name))
         depth = np.array(depth).astype(np.float32)
         depth = resize_depth(depth, target_width, target_height)

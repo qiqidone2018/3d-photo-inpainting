@@ -26,8 +26,8 @@ import os
 #os.environ['QT_DEBUG_PLUGINS'] = '1'
 import subprocess
 subprocess.run('nvidia-smi', shell=True)
-from pyvirtualdisplay import Display
-display = Display(visible=0, size=(1920, 1080)).start()
+# from pyvirtualdisplay import Display
+# display = Display(visible=0, size=(1920, 1080)).start()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--config', type=str, default='argument.yml',help='Configure of post processing')
